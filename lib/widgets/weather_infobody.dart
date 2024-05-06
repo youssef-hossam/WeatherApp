@@ -6,14 +6,13 @@ import 'package:weatherapp/main.dart';
 import '../models/weather_model.dart';
 
 class WeatherInfoBody extends StatelessWidget {
-  WeatherInfoBody({
+  const WeatherInfoBody({
     super.key,
+    required this.weatherModel,
   });
-
+  final WeatherModel weatherModel;
   @override
   Widget build(BuildContext context) {
-    WeatherModel weatherModel =
-        BlocProvider.of<GetWeatherCubit>(context).weatherModel!;
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(

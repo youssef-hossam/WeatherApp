@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
                         builder: (context) => SerachView(),
                       ));
                 },
-                icon: Icon(
+                icon: const Icon(
                   Icons.search,
                 ))
           ],
@@ -30,10 +30,16 @@ class HomeView extends StatelessWidget {
         ),
         body: BlocBuilder<GetWeatherCubit, WeatherState>(
           builder: (context, state) {
-            if (state is WeatherIntialState) {
-              return NoWeatherBody();
+            if (state is WeatherLoadingState) {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is WeatherIntialState) {
+              return const NoWeatherBody();
             } else if (state is WeatherinfoLoadedState) {
-              return WeatherInfoBody();
+              return WeatherInfoBody(
+                weatherModel: state.weatherModel,
+              );
             } else {
               return Center(
                 child: Text("oops there was an error"),
